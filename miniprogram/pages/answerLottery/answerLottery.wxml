@@ -1,0 +1,32 @@
+<view class="container">
+  <!-- 简介 -->
+  <view class="guide">
+    <text class="headline">答题抽奖 demo 介绍</text>
+    <text class="p">挑战你的能力，给你超越的机会</text>
+    <text class="p">1. 确保正在使用基础库 2.8.1</text>
+    <text class="p">2. 打开云开发控制台，进入到数据库管理页</text>
+    <text class="p">3. 选择添加集合，集合名设置为 chatroom</text>
+    <text class="p">4. 将集合设置为所有用户可读、仅创建者可写</text>
+    <text class="p">5. 确保IDE增强编译已开启（如无，到工具详情页中开启）</text>
+    <text class="p">6. 点击下方按钮进入聊天室！</text>
+  </view>
+
+  <view class="uploader">
+    <navigator url="./question/question" open-type="navigate" class="uploader-text">
+      <text>开始答题</text>
+    </navigator>
+  </view>
+
+  <view class="uploader">
+    <navigator url="./question/question" open-type="navigate" class="uploader-text">
+      <text>再答一次</text>
+    </navigator>
+  </view>
+
+  <view class="uploader">
+    <navigator url="./question/question" open-type="navigate" class="uploader-text">
+      <text>下期再来</text>
+    </navigator>
+  </view>
+  
+</view>

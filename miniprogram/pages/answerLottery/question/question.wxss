@@ -1,0 +1,78 @@
+/* pages/answerLottery/question/question.wxss */
+
+@import "../../../style/guide.wxss";
+page{
+  height:100%;
+  background: rgb(190, 15, 15);
+}
+.container{
+  position: relative;
+}
+image{
+  position: absolute;
+  display:flex;
+  height: 100%;
+  justify-content: center;
+  align-items:center;
+}
+.guide{
+  position: absolute;
+  z-index: 1;
+}
+.guide_inner{
+  background-color: white;
+  border-radius: 8px;
+}
+.guide_top{
+  background-color: white;
+  border-radius: 8px;
+}
+.guide_left{
+  width: 90%;
+  margin: 0 auto;
+  height: 40px;
+  line-height: 40px;
+}
+.guide_title{
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+.guide_author{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.footline{
+  background-color: lightblue;
+  color: green;
+}
+.guide_author2{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+button {
+  padding: 8px 24px;
+  line-height: 1.41176471;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 10px;
+}
+/** 添加自定义button样式:default**/
+button[type='default'] {
+  color: #666;
+  background-color: #dfdfdf;
+}
+/** 添加自定义button样式:primary**/
+button[type='primary'] {
+  color: #fff;
+  background-color: green;
+}
+/** 添加自定义button样式:warn**/
+button[type='warn'] {
+  color: #fff;
+  background-color: red;
+}
+  
