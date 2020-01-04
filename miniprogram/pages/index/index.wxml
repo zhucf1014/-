@@ -19,7 +19,10 @@
 
   <!-- 答题 -->
   <view class="uploader">
-    <navigator url="../answerLottery/answerLottery" open-type="navigate" class="uploader-text">
+    <navigator wx:if="{{openid!=''}}" url="../answerLottery/answerLottery" open-type="navigate" class="uploader-text">
+      <text>答题</text>
+    </navigator>
+    <navigator wx:if="{{openid==''}}" url="index" bindtap="onShowtip" open-type="navigate" class="uploader-text">
       <text>答题</text>
     </navigator>
   </view>
@@ -27,7 +30,10 @@
 
   <!-- 抽奖 -->
   <view class="uploader">
-    <navigator url="../answerLottery/answerLottery" open-type="navigate" class="uploader-text">
+    <navigator wx:if="{{openid!=''}}" url="../answerLottery/answerLottery" open-type="navigate" class="uploader-text">
+      <text>抽奖 Demo</text>
+    </navigator>
+    <navigator wx:if="{{openid==''}}" url="index" bindtap="onShowtip" open-type="navigate" class="uploader-text">
       <text>抽奖 Demo</text>
     </navigator>
   </view>

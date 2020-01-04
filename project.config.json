@@ -7,7 +7,8 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"enhance": true
+		"enhance": true,
+		"checkSiteMap": false
 	},
 	"appid": "wxa6cd2e38eb000d7f",
 	"projectname": "gonglong",

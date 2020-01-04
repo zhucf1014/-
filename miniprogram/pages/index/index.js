@@ -30,13 +30,22 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
-              console.log(this.data.userInfo)
+              //console.log(this.data.userInfo)
             }
           })
         }
       }
     })
 
+  },
+
+  //onShow
+  onShow() { //返回显示页面状态函数
+    //错误处理
+    //this.onLoad()//再次加载，实现返回上一页页面刷新
+    //正确方法
+    //只执行获取地址的方法，来进行局部刷新
+    //this.onGetOpenid()
   },
 
   onGetUserInfo: function(e) {
@@ -61,9 +70,10 @@ Page({
         // wx.navigateTo({
         //   url: '../userConsole/userConsole',
         // })
-        // 新增用户信息
-        //this.onAdd();
+        // 查询用户信息
         this.onQuery();
+        // 查询答题记录
+        this.onQueryRecord();
         
       },
       fail: err => {
@@ -93,10 +103,10 @@ Page({
         }
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '查询记录失败'
+        // })
         console.error('[数据库] [查询记录] 失败：', err)
       }
     })
@@ -111,16 +121,16 @@ Page({
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
-        wx.showToast({
-          title: '新增记录成功',
-        })
+        // wx.showToast({
+        //   title: '新增记录成功',
+        // })
         console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '新增记录失败'
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '新增记录失败'
+        // })
         console.error('[数据库] [新增记录] 失败：', err)
       }
     })
@@ -140,6 +150,37 @@ Page({
       fail: err => {
         icon: 'none',
         console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+  },
+
+  // 提示点击授权登录
+  onShowtip: function () {
+    wx.showToast({
+      icon: 'none',
+      title: '未授权登录'
+    })
+  },
+
+  // 查询答题记录
+  onQueryRecord: function() {
+    const db = wx.cloud.database()
+    db.collection('record').where({
+      _openid : this.data.openid,
+      batchcode : app.globalData.batchcode
+    }).get({
+      success: res => {
+        
+        console.log('[数据库] [查询记录] 成功: ', res);
+        app.globalData.record = res.data;
+        //console.log(app.globalData.record);
+      },
+      fail: err => {
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '查询记录失败'
+        // })
+        console.error('[数据库] [查询记录] 失败：', err)
       }
     })
   },

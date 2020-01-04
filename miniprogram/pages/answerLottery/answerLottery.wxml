@@ -12,19 +12,19 @@
   </view>
 
   <view class="uploader">
-    <navigator url="./question/question" open-type="navigate" class="uploader-text">
+    <navigator wx:if="{{record.length==0}}" url="./question/question" open-type="navigate" class="uploader-text">
       <text>开始答题</text>
     </navigator>
   </view>
 
   <view class="uploader">
-    <navigator url="./question/question" open-type="navigate" class="uploader-text">
+    <navigator wx:if="{{record.length==1}}" url="./question/question" open-type="navigate" class="uploader-text">
       <text>再答一次</text>
     </navigator>
   </view>
 
   <view class="uploader">
-    <navigator url="./question/question" open-type="navigate" class="uploader-text">
+    <navigator wx:if="{{record.length>=2}}" url="answerLottery" open-type="navigate" class="uploader-text">
       <text>下期再来</text>
     </navigator>
   </view>

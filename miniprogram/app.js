@@ -1,3 +1,81 @@
+//app.js
+App({
+  onLaunch: function () {
+    // 小程序启动之后 触发
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+    } else {
+      wx.cloud.init({
+        // env 参数说明：
+        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
+        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
+        //   如不填则使用默认环境（第一个创建的环境）
+        // env: 'my-env-id',
+        traceUser: true,
+      })
+    }
+    // 查询答题批次信息
+    this.onQueryBatch();
+
+    this.globalData = {
+      count : 0
+    }
+  },
+
+  // 查询答题批次信息
+  onQueryBatch: function() {
+    const db = wx.cloud.database()
+    db.collection('batch').where({
+
+    })
+    .orderBy('batchcode', 'desc')
+    .skip(0)
+    .limit(1)
+    .get({
+      success: res => {
+        
+        console.log('[数据库] [查询记录] 成功: ', res);
+        this.globalData.batch = res.data[0];
+        //console.log(this.globalData.batch);
+        // 查询答题题目信息
+        this.onQueryQuestion();
+        
+      },
+      fail: err => {
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '查询记录失败'
+        // })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+  },
+
+  // 查询答题题目信息
+  onQueryQuestion: function() {
+    const db = wx.cloud.database()
+    db.collection('question').where({
+      batchcode : this.globalData.batch.batchcode
+    }).get({
+      success: res => {
+        
+        console.log('[数据库] [查询记录] 成功: ', res);
+        this.globalData.questions = res.data;
+        //console.log(this.globalData.questions);
+      },
+      fail: err => {
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '查询记录失败'
+        // })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+  }
+
+})
+
+
 //题目
 var questions = [
   {
@@ -92,32 +170,3 @@ var questions = [
     ]
   }
 ];
-//获取题目
-function getQuestions () {
-  //请求云服务
-  return questions; //模拟获取数据
-}
-//app.js
-App({
-  onLaunch: function () {
-    // 小程序启动之后 触发
-    if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-    } else {
-      wx.cloud.init({
-        // env 参数说明：
-        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
-        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
-        //   如不填则使用默认环境（第一个创建的环境）
-        // env: 'my-env-id',
-        traceUser: true,
-      })
-    }
-
-    this.globalData = {
-      count : 0,
-      questions : getQuestions ()
-    }
-  }
-})
-
